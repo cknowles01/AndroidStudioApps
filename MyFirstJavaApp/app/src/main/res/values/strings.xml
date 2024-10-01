@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyFirstJavaApp</string>
+    <string name="my_string">pig</string>
+</resources>
