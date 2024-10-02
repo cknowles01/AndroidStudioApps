@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -60,28 +62,30 @@ class MainActivity : ComponentActivity() {
 fun ArtGallery(modifier: Modifier = Modifier) {
     var currentPicture by remember { mutableStateOf(1) }
 
-    Column {
+    Column (modifier = modifier
+        .fillMaxSize()
+    ){
 //        Spacer(modifier = Modifier
 //            .weight(1f))
         Box(modifier = Modifier
             .fillMaxSize()
+            .weight(1f)
             .padding(16.dp),
             contentAlignment = Alignment.Center
 
 
         ) {
-            ChangePicture(pictureNumber = currentPicture)
 
+            ChangePicture(pictureNumber = currentPicture)
+        }
             //IMAGES SHOULD GO ABOVE HERE
 
             //THIS IS FOR THE BUTTONS
-//            Spacer(
-//                modifier = Modifier
-//                    .weight(1f)
-//            )
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    //.weight(1f)
                     .padding(16.dp),
 
                 horizontalArrangement = Arrangement.SpaceEvenly
@@ -98,7 +102,7 @@ fun ArtGallery(modifier: Modifier = Modifier) {
                     Log.d("ArtGaller", "currentPicture = $currentPicture")
                 }
             }
-        }
+
 
     }
 }
