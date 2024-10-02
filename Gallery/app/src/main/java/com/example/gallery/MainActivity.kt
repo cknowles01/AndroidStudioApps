@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,7 +38,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.LayoutInfo
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,6 +48,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.gallery.ui.theme.GalleryTheme
 
 class MainActivity : ComponentActivity() {
@@ -66,6 +70,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ArtGallery(modifier: Modifier = Modifier) {
     var currentPicture by remember { mutableStateOf(1) }
+
+
 
     Column (modifier = modifier
         .fillMaxSize()
@@ -171,7 +177,7 @@ fun ChangePicture(pictureNumber: Int, modifier: Modifier = Modifier) {
         Box(modifier = Modifier
             .fillMaxWidth(),
             //.weight(.1f),
-            
+
             contentAlignment = Alignment.Center
         ) {
             Image(
@@ -183,24 +189,46 @@ fun ChangePicture(pictureNumber: Int, modifier: Modifier = Modifier) {
                 contentScale = ContentScale.Fit //scales to fit image in the box
             )
         }
-        Text(
-            text = stringResource(id = titleResource),
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center
 
-        )
-        Text(
-            text = stringResource(id = infoResource),
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier
-                //.padding(top = 8.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center
+        TextBox(
+            stringResource(id = titleResource),
+            stringResource(id = infoResource)
+
 
         )
 
+    }
+}
+
+@Composable
+fun TextBox(name: String, info: String) {
+    Box(
+        modifier = Modifier
+            .padding(16.dp)
+            .background(color = Color.LightGray, shape = MaterialTheme.shapes.extraSmall)
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = name,
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                color = Color.Black,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = info,
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 16.sp),
+                color = Color.Black,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
