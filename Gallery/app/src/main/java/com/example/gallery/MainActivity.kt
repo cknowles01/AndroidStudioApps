@@ -73,7 +73,6 @@ fun ArtGallery(modifier: Modifier = Modifier) {
             .padding(16.dp),
             contentAlignment = Alignment.Center
 
-
         ) {
 
             ChangePicture(pictureNumber = currentPicture)
@@ -102,8 +101,6 @@ fun ArtGallery(modifier: Modifier = Modifier) {
                     Log.d("ArtGaller", "currentPicture = $currentPicture")
                 }
             }
-
-
     }
 }
 

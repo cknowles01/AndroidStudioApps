@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Gallery</string>
+    <!-- ART NAMES GO BELOW HERE -->
+    <string name="washingtonName">Washington Crossing the Delaware</string>
+    <string name="washingtonInfo">Emanuel Leutze, 1851</string>
+    <string name="pearlName">Girl with a Pearl Earring</string>
+    <string name="pearlInfo">Johannes Vermeer, c. 1665</string>
+    <string name="kanagawaName">The Great Wave off Kanagawa</string>
+    <string name="kanagawaInfo">Hokusai, 1831</string>
+    <string name="monalisaName">Mona Lisa</string>
+    <string name="monalistInfo">Leonardo da Vinci, c. 1505</string>
+    <string name="hatName">Self-Portrait with Grey Felt Hat</string>
+    <string name="hatInfo">Vincent Van Gogh, 1888</string>
+    <string name="memoryName">The Persistence of Memory</string>
+    <string name="memoryInfo">Salvador Dalí, 1931</string>
+    <string name="screamName">The Scream</string>
+    <string name="screamInfo">Edvard Munch, 1893</string>
+    <string name="starrynightName">The Starry Night</string>
+    <string name="starrynightInfo">Vincent van Gogh, 1889</string>
+
 </resources>
