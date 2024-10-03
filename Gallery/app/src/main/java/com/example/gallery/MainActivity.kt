@@ -105,6 +105,7 @@ fun ArtGallery(modifier: Modifier = Modifier) {
                 },
                     modifier = Modifier
                         .width(120.dp)
+
                 ) {
                     Text(text = "Previous")
                 }
