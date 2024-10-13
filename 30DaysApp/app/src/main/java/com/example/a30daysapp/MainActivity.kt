@@ -23,7 +23,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.a30daysapp.data.Tip
 import com.example.a30daysapp.data.tips
-import com.example.a30daysapp.ui.theme._30DaysAppTheme
+
+import com.example.compose._30DaysAppTheme
 import org.jetbrains.annotations.Contract
 
 class MainActivity : ComponentActivity() {
