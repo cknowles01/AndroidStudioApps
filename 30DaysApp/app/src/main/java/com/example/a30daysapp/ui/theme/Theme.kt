@@ -1,4 +1,4 @@
-package com.example.compose
+package com.example.a30daysapp.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -9,11 +9,10 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
+
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -271,7 +270,7 @@ fun _30DaysAppTheme(
         darkTheme -> darkScheme
         else -> lightScheme
     }
-  
+
 
 
     MaterialTheme(
