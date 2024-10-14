@@ -276,7 +276,8 @@ fun _30DaysAppTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
+        shapes = Shapes,
     )
 }
 
