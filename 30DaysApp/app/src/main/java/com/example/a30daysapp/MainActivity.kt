@@ -22,8 +22,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -39,6 +42,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.a30daysapp.data.Tip
 import com.example.a30daysapp.data.tips
 
@@ -90,8 +94,6 @@ fun QuoteCard(
         animationSpec = tween(durationMillis = 300)
     )
 
-
-
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -104,6 +106,7 @@ fun QuoteCard(
             .scale(scale)
             .padding(dimensionResource(id = R.dimen.padding_8))
     ) {
+
         Column() {
             Row(
                 modifier = modifier
@@ -115,6 +118,7 @@ fun QuoteCard(
             }
 
         }
+        Spacer(modifier = Modifier.height(4.dp))
     }
 }
 
@@ -140,7 +144,7 @@ fun TipInformation(
         )
         Text(
             text = stringResource(quote),
-            style = MaterialTheme.typography.displaySmall,
+            style = MaterialTheme.typography.displayMedium,
             modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_24))
         )
     }

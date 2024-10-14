@@ -16,17 +16,17 @@ val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.Normal,
-        fontSize = 50.sp
+        fontSize = 48.sp
     ),
     displayMedium = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.Normal,
-        fontSize = 24.sp
+        fontSize = 40.sp
     ),
     displaySmall = TextStyle(
         fontFamily = Nunito,
-        fontWeight = FontWeight.ExtraBold,
-        fontSize = 48.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 32.sp
     )
 
 )
