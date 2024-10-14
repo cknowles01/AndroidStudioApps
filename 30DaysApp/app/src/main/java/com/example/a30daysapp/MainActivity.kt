@@ -41,6 +41,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -93,7 +94,7 @@ fun QuoteCard(
     var expanded by remember { mutableStateOf(false) }
 
     val scale by animateFloatAsState(
-        targetValue = if (expanded) 1.15f else 1f,
+        targetValue = if (expanded) 1.10f else 1f,
             animationSpec = tween(durationMillis = 500)
 
     )
@@ -103,8 +104,8 @@ fun QuoteCard(
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable { expanded = !expanded }
-            .animateContentSize()
-            .graphicsLayer(scaleX = scale, scaleY = scale)
+            //.animateContentSize()
+            .scale(scale)
             .padding(dimensionResource(id = R.dimen.padding_8)),
             //.clip(RoundedCornerShape(dimensionResource(R.dimen.corner))),
 
@@ -116,6 +117,7 @@ fun QuoteCard(
         Column() {
             Row(
                 modifier = modifier
+                    .scale(scale)
                     .fillMaxWidth()
                     .padding(dimensionResource(R.dimen.padding_16))
             ) {
