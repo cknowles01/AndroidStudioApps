@@ -13,6 +13,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
+import androidx.compose.foundation.indication
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+
+
 
 
 
@@ -21,12 +26,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -51,6 +59,7 @@ import com.example.a30daysapp.data.Tip
 import com.example.a30daysapp.data.tips
 
 import com.example.a30daysapp.ui.theme._30DaysAppTheme
+import kotlin.math.exp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,15 +104,44 @@ fun QuoteCard(
 
     val scale by animateFloatAsState(
         targetValue = if (expanded) 1.10f else 1f,
-            animationSpec = tween(durationMillis = 500)
-
+        animationSpec = tween(durationMillis = 300)
     )
+
+
 
     Card(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable { expanded = !expanded }
+            .clickable(
+                onClick = { expanded = !expanded },
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null
+            )
+            .scale(scale)
+            .padding(dimensionResource(id = R.dimen.padding_8))
+    ) {
+        Column() {
+            Row(
+                modifier = modifier
+                    .scale(scale)
+                    .fillMaxWidth()
+                    .padding(dimensionResource(R.dimen.padding_16))
+            ) {
+                TipInformation(day = tip.day, name = tip.tipname, quote = tip.quote)
+            }
+
+        }
+    }
+}
+    /*Card(
+        modifier = modifier
+            //.fillMaxWidth()
+            //.wrapContentHeight()
+            .clickable(
+                onClick = {},
+                interactionSource = remember { MutableInteractionSource() },
+            )
             //.animateContentSize()
             .scale(scale)
             .padding(dimensionResource(id = R.dimen.padding_8)),
@@ -128,7 +166,7 @@ fun QuoteCard(
     }
 
 }
-
+*/
 
 
 @Composable
