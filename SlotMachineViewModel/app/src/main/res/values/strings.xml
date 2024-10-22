@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Slot Machine</string>
+
+    <!-- PRINT AFTER EVERY BUTTON PRESS -->
+    <string name="none">Better luck next time!!</string>
+    <string name="two">Ooohh... So close!!!</string>
+    <string name="jackpot">Congratulations!!!!! You won!</string>
+</resources>
