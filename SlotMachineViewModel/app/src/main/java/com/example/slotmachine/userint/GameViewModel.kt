@@ -1,7 +1,8 @@
 package com.example.slotmachine.userint
 
 import androidx.lifecycle.ViewModel
-import com.example.slotmachine.slotOdds
+
+
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,19 +32,17 @@ class GameViewModel : ViewModel() {
 
     private fun slotResults(slot1: Int, slot2: Int, slot3: Int) {
         if (slot1 == slot2 || slot1 == slot3 || slot2 == slot3) {
-            updateMoney(200)
+            updateMoney(2)
         } else if (slot1 == slot2 && slot2 == slot3) {
-            updateMoney(1000)
+            updateMoney(10)
         } else {
-            updateMoney(-200)
+            updateMoney(-2)
         }
     }
 
     fun resetGame() {
         _uiState.value = _uiState.value.copy(isGameOver = true)
     }
-
-
 
 
     fun gameOver() {
