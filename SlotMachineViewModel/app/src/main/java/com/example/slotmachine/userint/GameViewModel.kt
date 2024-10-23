@@ -15,10 +15,10 @@ class GameViewModel : ViewModel() {
     private fun updateMoney(updatedBalance: Int) {
         val currentBalance = _uiState.value.money
         val newBalance = currentBalance + updatedBalance
-        if (newBalance < 0) {
+        if (newBalance <= 0) {
             _uiState.value = _uiState.value.copy(money = 0, isGameOver = true)
         } else {
-            _uiState.value = _uiState.value.copy(money = updatedBalance)
+            _uiState.value = _uiState.value.copy(money = newBalance)
         }
     }
 
@@ -32,18 +32,26 @@ class GameViewModel : ViewModel() {
 
     private fun slotResults(slot1: Int, slot2: Int, slot3: Int) {
         if (slot1 == slot2 || slot1 == slot3 || slot2 == slot3) {
-            updateMoney(2)
+            updateMoney(100)
         } else if (slot1 == slot2 && slot2 == slot3) {
-            updateMoney(10)
+            updateMoney(10000)
         } else {
-            updateMoney()
+            updateMoney(-100)
         }
     }
 
     fun resetGame() {
-        _uiState.value = _uiState.value.copy(isGameOver = true)
+        _uiState.value.money = 1000
+        _uiState.value = _uiState.value.copy(isGameOver = false)
     }
 
+    fun cashOut() {
+        if (_uiState.value.maxMoney < _uiState.value.money) _uiState.value.maxMoney = _uiState.value.money
+
+
+        _uiState.value.money = 1000
+        _uiState.value = _uiState.value.copy(isGameOver = false)
+    }
 
     fun gameOver() {
         _uiState.value.money = 10000

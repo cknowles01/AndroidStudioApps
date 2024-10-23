@@ -15,6 +15,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -36,24 +39,31 @@ fun TestingImage(modifier: Modifier = Modifier) {
 fun SlotMachineScreen(gameViewModel: GameViewModel = viewModel()) {
     val gameUiState by gameViewModel.uiState.collectAsState()
 
+    var showCashOutDialog by remember { mutableStateOf(false) }
+
     val isGameOver = gameUiState.isGameOver
-    var money = gameUiState.money
+    val money = gameUiState.money
+    val maxMoney = gameUiState.maxMoney
     val currentSlots = gameUiState.currentSlots
 
     val onSpin: () -> Unit = { gameViewModel.spinSlots() }
     val onRestart: () -> Unit = { gameViewModel.resetGame() }
-    //val onCashOut = gameViewModel.
+
+
+    val isCashOut: () -> Unit = { showCashOutDialog = true}
+
 
 
 
     if (isGameOver) {
-        GameOverDialogue(onRestart = { onRestart })
+        GameOverDialogue(onRestart = onRestart)
     } else {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Text("Max Money: $$maxMoney")
             Text("Money: $$money")
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -62,7 +72,7 @@ fun SlotMachineScreen(gameViewModel: GameViewModel = viewModel()) {
                     Image(
                         painter = painterResource(id = slotImage),
                         contentDescription = null,
-                        modifier = Modifier.size(8.dp)
+                        modifier = Modifier.size(80.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                 }
@@ -70,11 +80,21 @@ fun SlotMachineScreen(gameViewModel: GameViewModel = viewModel()) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(onClick = { onSpin }) {
+            Button(onClick = onSpin) {
                 Text("Spin")
             }
-            Button(onClick = { onSpin }) {
-                Text("Cash Out")
+            Button(onClick = isCashOut) {
+                Text("CASH OUT BUT DOESN'T WORK")
+            }
+
+            if (showCashOutDialog) {
+                CashOutDialogue(money, onCashOut = {
+                    showCashOutDialog = false
+                    gameViewModel.cashOut()
+                })
+
+
+
             }
         }
     }
@@ -99,6 +119,23 @@ fun GameOverDialogue(onRestart: () -> Unit) {
     )
 }
 
+
+@Composable
+fun CashOutDialogue(money: Int, onCashOut: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = {
+        },
+        title = { Text("You've cashed out!") },
+        text = { Text("You leave with $money dollars!") },
+
+        confirmButton = {
+            Button(onClick = onCashOut) {
+                Text("Restart")
+            }
+        }
+    )
+}
+
 fun slotOdds(modifier: Modifier = Modifier) : Int {
     val random_num = (1..9).random()
     return when (random_num) {
@@ -112,6 +149,7 @@ fun slotOdds(modifier: Modifier = Modifier) : Int {
         8 -> R.drawable.tennisball
         9 -> R.drawable.tennisracket
         else -> R.drawable.error
+
     }
 
 }
