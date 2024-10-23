@@ -1,6 +1,7 @@
 package com.example.slotmachine.userint
 
 import androidx.lifecycle.ViewModel
+import com.example.slotmachine.R
 
 
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,7 +33,7 @@ class GameViewModel : ViewModel() {
 
     private fun slotResults(slot1: Int, slot2: Int, slot3: Int) {
         if (slot1 == slot2 || slot1 == slot3 || slot2 == slot3) {
-            updateMoney(100)
+            updateMoney(150)
         } else if (slot1 == slot2 && slot2 == slot3) {
             updateMoney(10000)
         } else {
@@ -43,14 +44,15 @@ class GameViewModel : ViewModel() {
     fun resetGame() {
         _uiState.value.money = 1000
         _uiState.value = _uiState.value.copy(isGameOver = false)
+        _uiState.value.currentSlots = listOf(R.drawable.error, R.drawable.error, R.drawable.error)
     }
 
     fun cashOut() {
         if (_uiState.value.maxMoney < _uiState.value.money) _uiState.value.maxMoney = _uiState.value.money
 
-
         _uiState.value.money = 1000
         _uiState.value = _uiState.value.copy(isGameOver = false)
+        _uiState.value.currentSlots = listOf(R.drawable.error, R.drawable.error, R.drawable.error)
     }
 
     fun gameOver() {

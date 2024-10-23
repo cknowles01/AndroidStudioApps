@@ -26,14 +26,6 @@ import com.example.slotmachine.R
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 
-@Composable
-fun TestingImage(modifier: Modifier = Modifier) {
-    Image (
-        painterResource(id = R.drawable.tennisracket),
-        contentDescription = "hel"
-    )
-}
-
 
 @Composable
 fun SlotMachineScreen(gameViewModel: GameViewModel = viewModel()) {
@@ -84,7 +76,7 @@ fun SlotMachineScreen(gameViewModel: GameViewModel = viewModel()) {
                 Text("Spin")
             }
             Button(onClick = isCashOut) {
-                Text("CASH OUT BUT DOESN'T WORK")
+                Text("Cash Out")
             }
 
             if (showCashOutDialog) {
