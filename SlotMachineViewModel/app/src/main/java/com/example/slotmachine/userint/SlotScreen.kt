@@ -39,13 +39,14 @@ fun SlotMachineScreen(gameViewModel: GameViewModel = viewModel()) {
     val isGameOver = gameUiState.isGameOver
     var money = gameUiState.money
     val currentSlots = gameUiState.currentSlots
-    val onSpin = gameViewModel.spinSlots()
-    val onRestart = gameViewModel.resetGame()
+
+    val onSpin: () -> Unit = { gameViewModel.spinSlots() }
+    val onRestart: () -> Unit = { gameViewModel.resetGame() }
     //val onCashOut = gameViewModel.
 
 
 
-    if (isGameOver == false) {
+    if (isGameOver) {
         GameOverDialogue(onRestart = { onRestart })
     } else {
         Column(

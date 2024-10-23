@@ -36,7 +36,7 @@ class GameViewModel : ViewModel() {
         } else if (slot1 == slot2 && slot2 == slot3) {
             updateMoney(10)
         } else {
-            updateMoney(-2)
+            updateMoney()
         }
     }
 
