@@ -32,7 +32,6 @@ class GameViewModel : ViewModel() {
     }
 
     private fun slotResults(slot1: Int, slot2: Int, slot3: Int) {
-
         if  (slot1 == slot2 && slot1 == slot3) { //all three in a row
             updateMoney(10000)
         } else if (slot1 == slot2 || slot1 == slot3 || slot2 == slot3) { //two pair

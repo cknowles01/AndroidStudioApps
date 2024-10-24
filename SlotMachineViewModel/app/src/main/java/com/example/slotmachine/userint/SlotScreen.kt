@@ -136,7 +136,7 @@ fun slotOdds(modifier: Modifier = Modifier) : Int {
         3 -> R.drawable.basketball
         4 -> R.drawable.football
         5 -> R.drawable.hockeypuck
-        6 -> R.drawable.hockeystick
+        6 -> R.drawable.hockeystic k
         7 -> R.drawable.soccerball
         8 -> R.drawable.tennisball
         9 -> R.drawable.tennisracket
