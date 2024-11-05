@@ -3,12 +3,12 @@ package com.example.recipeapp.model
 class RecipeItem(
     open val name: String,
     open val image: Int,
-    open val listOf: String
+    open val ingredients: List<String>
 ) {
     data class FoodItem(
         val name: String,
         val image: Int,
-        val listOf: String
+        val ingredients: List<String>
     )
 }
 

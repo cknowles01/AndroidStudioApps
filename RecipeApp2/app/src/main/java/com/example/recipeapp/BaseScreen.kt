@@ -62,7 +62,7 @@ fun RecipeRow(
                  style = MaterialTheme.typography.headlineSmall
              )
              Text(
-                 text = item.listOf,
+                 text = item.ingredients.joinToString(separator = ", "),
                  style = MaterialTheme.typography.headlineSmall
              )
 

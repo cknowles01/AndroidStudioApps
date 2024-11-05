@@ -8,17 +8,17 @@ object DataSource {
         RecipeItem(
             name = "Cheeseburger",
             image = R.drawable.burger,
-            listOf = ("Beef, Buns, Cheese, and Lettuce"),
+            ingredients = listOf("Beef", "Cheese"),
         ),
         RecipeItem(
             name = "Pizza",
             image = R.drawable.pizza,
-            listOf = ("Cheese, Pepperoni, Tomato sauce and Dough")
+            ingredients = listOf("Cheese", "Dough", "Pepperoni")
         ),
         RecipeItem(
             name = "Clam Chowder",
             image = R.drawable.clamchowder,
-            listOf = ("Clams, Potatoes, cream, onions, and celery")
+            ingredients = listOf("Clams", "Cream", "Celery")
         )
     )
 }
