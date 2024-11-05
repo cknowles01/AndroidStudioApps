@@ -51,7 +51,7 @@ android {
 
 dependencies {
 
-
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx.v1140)
     implementation(libs.androidx.core)
     implementation(libs.androidx.core.ktx)

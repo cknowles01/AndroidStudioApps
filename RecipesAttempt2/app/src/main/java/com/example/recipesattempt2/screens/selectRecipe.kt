@@ -1,5 +1,7 @@
 package com.example.recipesattempt2.screens
 
+import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -9,12 +11,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -22,6 +31,17 @@ import com.example.recipesattempt2.OrderViewModel
 import com.example.recipesattempt2.R
 import com.example.recipesattempt2.Recipe
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+
+
+enum class RecipeScreen(@SuppressLint("SupportAnnotationUsage") @StringRes val title: String) {
+    Start(title = "Select Recipe"),
+    Details(title = "More details"),
+    Ingredients(title = "Ingredient list")
+}
 
 
 
@@ -83,11 +103,56 @@ fun RecipeItem(
                         checked = selectedIngredients.contains(ingredient),
                         onCheckedChange = { onIngredientToggle(ingredient)}
                     )
+
                 }
             }
         }
     }
-
-
 }
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RecipeAppBar(
+    currentScreen: RecipeScreen,
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    TopAppBar(
+        title = { Text(currentScreen.title) },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = modifier,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "goback"
+                    )
+                }
+            }
+        }
+    )
+}
+
+
+
+
+@Composable
+fun RecipeApp(
+    viewModel: OrderViewModel = viewModel(),
+    navController: NavHostController = rememberNavController()
+    ){
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = RecipeScreen.valueOf(
+        backStackEntry?.destination?.route ?: RecipeScreen.Start.name
+    )
+    Scaffold(
+
+    )
+}
+
 
