@@ -3,7 +3,8 @@ package com.example.recipesattempt2
 data class Recipe(
     val name: String,
     val image: Int,
-    val ingredients: List<String>
+    val ingredients: List<String>,
+
 )
 
 

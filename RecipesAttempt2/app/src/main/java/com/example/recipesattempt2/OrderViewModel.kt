@@ -27,17 +27,22 @@ class OrderViewModel: ViewModel() {
     }
 
 
+
+
     fun setRecipe(recipe: Recipe) {
         _uiState.update { currentState ->
             currentState.copy(
                 name = recipe.name,
                 image = recipe.image,
-                ingredients = recipe.ingredients
+                ingredients = recipe.ingredients,
+                selectedRecipe = recipe,
+
+
             )
         }
     }
 
-    
+
 
 
 }
