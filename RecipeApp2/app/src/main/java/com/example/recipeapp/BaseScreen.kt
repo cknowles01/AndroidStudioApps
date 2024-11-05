@@ -4,7 +4,6 @@ import android.view.MenuItem
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -17,33 +16,29 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.recipeapp.model.RecipeItem
-import com.example.recipeapp.model.RecipeItem.FoodItem
 
 @Composable
 fun BaseScreen(
-    options: List<FoodItem>,
+    options: List<RecipeItem>,
     modifier: Modifier = Modifier,
     onCancelButtonClicked: () -> Unit = {},
     onNextButtonClicked: () -> Unit = {},
-    onSelectionChanged: (FoodItem) -> Unit
+    onSelectionChanged: (RecipeItem) -> Unit
 ) {
     var selectedItemName by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = modifier) {
         options.forEach { item ->
+
             val onClick = {
                 selectedItemName = item.name
                 onSelectionChanged(item)
             }
-
-
         }
     }
-}
+
 @Composable
 fun RecipeRow(
      item: RecipeItem,
@@ -67,7 +62,7 @@ fun RecipeRow(
                  style = MaterialTheme.typography.headlineSmall
              )
              Text(
-                 text = item.desc,
+                 text = item.listOf,
                  style = MaterialTheme.typography.headlineSmall
              )
 
@@ -98,6 +93,7 @@ fun MenuScreenButtonGroup(
             Text("Next".uppercase())
         }
     }
+}
 }
 
 

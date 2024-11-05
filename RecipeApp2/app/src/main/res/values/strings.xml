@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">RecipeApp</string>
+    <string name="app_name">Recipe App</string>
+    <string name="recipeList">Recipe List</string>
+    <string name="ingredientsList">Ingredients List</string>
+    <string name="selectedIngredientsList">Selected Ingredients List</string>
+
+    <string name = "backButton">Back</string>
 </resources>

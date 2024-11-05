@@ -2,13 +2,13 @@ package com.example.recipeapp.model
 
 class RecipeItem(
     open val name: String,
-    open val desc: String,
     open val image: Int,
+    open val listOf: String
 ) {
     data class FoodItem(
         val name: String,
-        val desc: String,
         val image: Int,
+        val listOf: String
     )
 }
 

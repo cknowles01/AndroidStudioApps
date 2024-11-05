@@ -7,18 +7,18 @@ object DataSource {
     val Recipes = listOf(
         RecipeItem(
             name = "Cheeseburger",
-            desc = "",
-            image = R.drawable.burger
+            image = R.drawable.burger,
+            listOf = ("Beef, Buns, Cheese, and Lettuce"),
         ),
         RecipeItem(
             name = "Pizza",
-            desc = "",
-            image = R.drawable.pizza
+            image = R.drawable.pizza,
+            listOf = ("Cheese, Pepperoni, Tomato sauce and Dough")
         ),
         RecipeItem(
             name = "Clam Chowder",
-            desc = "",
-            image = R.drawable.clamchowder
+            image = R.drawable.clamchowder,
+            listOf = ("Clams, Potatoes, cream, onions, and celery")
         )
     )
 }
