@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.recipesattempt2.screens.RecipeScreen
 
 @Composable
-fun RecipeScreen(recipe: Recipe, onBack: () -> Unit) {
+fun DetailsScreen(recipe: Recipe, onBack: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()

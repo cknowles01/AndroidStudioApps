@@ -36,8 +36,6 @@ class OrderViewModel: ViewModel() {
                 image = recipe.image,
                 ingredients = recipe.ingredients,
                 selectedRecipe = recipe,
-
-
             )
         }
     }

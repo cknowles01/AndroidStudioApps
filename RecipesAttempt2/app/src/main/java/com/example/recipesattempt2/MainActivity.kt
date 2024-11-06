@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.recipesattempt2.screens.RecipeApp
 import com.example.recipesattempt2.screens.RecipesScreen
 import com.example.recipesattempt2.ui.theme.RecipesAttempt2Theme
 
@@ -27,17 +28,18 @@ class MainActivity : ComponentActivity() {
             RecipesAttempt2Theme {
                 val uiState by orderViewModel.uiState.collectAsState()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    RecipesScreen(
-                        recipes = DataSource.recipes,
-                        selectedRecipe = uiState.selectedRecipe,
-                        onRecipeSelect = { recipe ->
-                            orderViewModel.setRecipe(recipe)
-                        },
-                        onIngredientToggle = {
-                            orderViewModel.toggleIngredientSelection(ingredient = "hi")
-                        },
-                        selecedIngredients = uiState.selectedIngredients
-                    )
+//                    RecipesScreen(
+//                        recipes = DataSource.recipes,
+//                        selectedRecipe = uiState.selectedRecipe,
+//                        onRecipeSelect = { recipe ->
+//                            orderViewModel.setRecipe(recipe)
+//                        },
+//                        onIngredientToggle = {
+//                            orderViewModel.toggleIngredientSelection(ingredient = "hi")
+//                        },
+//                        selecedIngredients = uiState.selectedIngredients
+//                    )
+                    RecipeApp()
                 }
             }
         }

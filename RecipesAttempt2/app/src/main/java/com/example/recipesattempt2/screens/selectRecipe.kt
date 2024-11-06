@@ -1,6 +1,7 @@
 package com.example.recipesattempt2.screens
 
 import android.annotation.SuppressLint
+import android.telecom.Call.Details
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -42,6 +43,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.recipesattempt2.DataSource
+import com.example.recipesattempt2.DetailsScreen
 
 
 enum class RecipeScreen(@SuppressLint("SupportAnnotationUsage") @StringRes val title: String) {
@@ -61,8 +63,6 @@ fun RecipesScreen(
     selecedIngredients: List<String>
 ) {
     Column {
-        Text(text = "Recipe")
-
         recipes.forEach { recipe ->
             RecipeItem(
                 recipe = recipe,
@@ -179,12 +179,24 @@ fun RecipeApp(
                         selectedRecipe = uiState.selectedRecipe,
                         onRecipeSelect = { selectedRecipe ->
                             viewModel.setRecipe(selectedRecipe)
+                            navController.navigate(RecipeScreen.Details.name)
                         },
                         onIngredientToggle = { ingredient ->
                             viewModel.toggleIngredientSelection(ingredient)
                         },
                         selecedIngredients = uiState.selectedIngredients
                     )
+
+            }
+            composable(route = RecipeScreen.Details.name){
+                val context = LocalContext.current
+                uiState.selectedRecipe?.let { it1 ->
+                    DetailsScreen(
+                        recipe = it1
+                    ) {
+
+                    }
+                }
 
             }
 
