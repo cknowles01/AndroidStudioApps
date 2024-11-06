@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
@@ -31,10 +33,15 @@ import com.example.recipesattempt2.OrderViewModel
 import com.example.recipesattempt2.R
 import com.example.recipesattempt2.Recipe
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.recipesattempt2.DataSource
 
 
 enum class RecipeScreen(@SuppressLint("SupportAnnotationUsage") @StringRes val title: String) {
@@ -129,7 +136,7 @@ fun RecipeAppBar(
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "goback"
                     )
                 }
@@ -143,7 +150,8 @@ fun RecipeAppBar(
 
 @Composable
 fun RecipeApp(
-    viewModel: OrderViewModel = viewModel(),
+    //viewModel: OrderViewModel = viewModel(),
+    viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     navController: NavHostController = rememberNavController()
     ){
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -151,8 +159,41 @@ fun RecipeApp(
         backStackEntry?.destination?.route ?: RecipeScreen.Start.name
     )
     Scaffold(
+        topBar = {
+            RecipeAppBar(
+                currentScreen = currentScreen,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateUp = { navController.navigateUp() })
+        }
+    ) { innerPadding ->
+        val uiState by viewModel.uiState.collectAsState()
 
-    )
+        NavHost(
+            navController = navController,
+            startDestination = RecipeScreen.Start.name,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(route = RecipeScreen.Start.name) {
+                    RecipesScreen(
+                        recipes = DataSource.recipes,
+                        selectedRecipe = uiState.selectedRecipe,
+                        onRecipeSelect = { selectedRecipe ->
+                            viewModel.setRecipe(selectedRecipe)
+                        },
+                        onIngredientToggle = { ingredient ->
+                            viewModel.toggleIngredientSelection(ingredient)
+                        },
+                        selecedIngredients = uiState.selectedIngredients
+                    )
+
+            }
+
+            
+        }
+
+    }
 }
+
+
 
 
