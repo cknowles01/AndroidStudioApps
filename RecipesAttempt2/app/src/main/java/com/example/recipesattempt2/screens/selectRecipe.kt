@@ -188,14 +188,21 @@ fun RecipeApp(
                     )
 
             }
-            composable(route = RecipeScreen.Details.name){
+            composable(route = RecipeScreen.Details.name) {
+                val selectedIngredients = uiState.selectedIngredients
                 val context = LocalContext.current
+
                 uiState.selectedRecipe?.let { it1 ->
                     DetailsScreen(
-                        recipe = it1
-                    ) {
+                        recipe = it1,
+                        onBack = { navController.popBackStack() },
+                        selectedIngredients = selectedIngredients,
+                        onIngredientToggle = { ingredient ->
+                            viewModel.toggleIngredientSelection(ingredient)
+                        })
+                }
 
-                    }
+
                 }
 
             }
@@ -204,7 +211,8 @@ fun RecipeApp(
         }
 
     }
-}
+
+
 
 
 
