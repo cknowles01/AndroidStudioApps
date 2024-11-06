@@ -74,10 +74,6 @@ fun DetailsScreen(recipe: Recipe, onBack: () -> Unit, selectedIngredients: List<
             }
         }
 
-
-        Text(
-            "steps maybe idk"
-        )
     }
 }
 

@@ -95,25 +95,6 @@ fun RecipeItem(
             painter = painterResource(recipe.image),
             contentDescription = null,
         )
-
-        if (isSelected) {
-            Text(text = "Ingredients:")
-
-            recipe.ingredients.forEach { ingredient ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onIngredientToggle(ingredient) }
-                        .padding(4.dp)
-                ) {
-                    Checkbox(
-                        checked = selectedIngredients.contains(ingredient),
-                        onCheckedChange = { onIngredientToggle(ingredient)}
-                    )
-
-                }
-            }
-        }
     }
 }
 
