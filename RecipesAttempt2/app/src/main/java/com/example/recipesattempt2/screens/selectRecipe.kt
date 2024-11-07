@@ -82,7 +82,7 @@ fun RecipesScreen(
                 .fillMaxWidth()
                 .padding(bottom = 20.dp)
         ) {
-            Text(text = "Hello")
+            Text(text = "Grocery List")
         }
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
@@ -193,7 +193,7 @@ fun RecipeApp(
                             viewModel.toggleIngredientSelection(ingredient)
                         },
                         selecedIngredients = uiState.selectedIngredients,
-                        buttonClick = { navController.navigate(RecipeScreen.Details.name) }
+                        buttonClick = { navController.navigate(RecipeScreen.Ingredients.name) }
                     )
 
             }
@@ -217,7 +217,6 @@ fun RecipeApp(
                 val selectedIngredients = uiState.selectedIngredients
                 uiState.selectedRecipe?.let { it1 ->
                     IngredientsPage(
-                        recipe = it1,
                         onBack = { navController.popBackStack() },
                         selectedIngredients = selectedIngredients,
                         onIngredientToggle = { ingredient ->

@@ -37,10 +37,7 @@ fun DetailsScreen(recipe: Recipe, onBack: () -> Unit, selectedIngredients: List<
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
         ) {
-            Button(onClick = onBack) {
-                Text("Hello")
 
-            }
         }
         Text(
             text = recipe.name,
