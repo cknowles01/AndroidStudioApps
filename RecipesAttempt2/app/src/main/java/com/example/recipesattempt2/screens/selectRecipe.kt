@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -44,6 +45,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.recipesattempt2.DataSource
 import com.example.recipesattempt2.DetailsScreen
+import com.example.recipesattempt2.IngredientsPage
 
 
 enum class RecipeScreen(@SuppressLint("SupportAnnotationUsage") @StringRes val title: String) {
@@ -60,8 +62,13 @@ fun RecipesScreen(
     selectedRecipe: Recipe?,
     onRecipeSelect: (Recipe) -> Unit,
     onIngredientToggle: (String) -> Unit,
-    selecedIngredients: List<String>
+    selecedIngredients: List<String>,
+    buttonClick: () -> Unit
 ) {
+    Button(onClick = { buttonClick()  }) {
+        Text(text = "Hello")
+    }
+    Spacer(modifier = Modifier.padding(20.dp))
     Column {
         recipes.forEach { recipe ->
             RecipeItem(
@@ -72,8 +79,11 @@ fun RecipesScreen(
                 selectedIngredients = selecedIngredients
             )
         }
+
     }
 }
+
+
 
 
 @Composable
@@ -165,7 +175,8 @@ fun RecipeApp(
                         onIngredientToggle = { ingredient ->
                             viewModel.toggleIngredientSelection(ingredient)
                         },
-                        selecedIngredients = uiState.selectedIngredients
+                        selecedIngredients = uiState.selectedIngredients,
+                        buttonClick = { navController.navigate(RecipeScreen.Details.name) }
                     )
 
             }
@@ -185,13 +196,20 @@ fun RecipeApp(
 
 
                 }
-
+            composable(route = RecipeScreen.Ingredients.name) {
+                val selectedIngredients = uiState.selectedIngredients
+                uiState.selectedRecipe?.let { it1 ->
+                    IngredientsPage(
+                        recipe = it1,
+                        onBack = { navController.popBackStack() },
+                        selectedIngredients = selectedIngredients,
+                        onIngredientToggle = { ingredient ->
+                            viewModel.toggleIngredientSelection(ingredient)
+                })
             }
-
-            
+            }
         }
-
-    }
+    }}
 
 
 
