@@ -5,13 +5,16 @@ import android.telecom.Call.Details
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
@@ -65,24 +68,38 @@ fun RecipesScreen(
     selecedIngredients: List<String>,
     buttonClick: () -> Unit
 ) {
-    Button(onClick = { buttonClick()  }) {
-        Text(text = "Hello")
-    }
-    Spacer(modifier = Modifier.padding(20.dp))
-    Column {
-        recipes.forEach { recipe ->
-            RecipeItem(
-                recipe = recipe,
-                isSelected = recipe == selectedRecipe ,
-                onSelect = { onRecipeSelect(recipe) },
-                onIngredientToggle = onIngredientToggle,
-                selectedIngredients = selecedIngredients
-            )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Button at the top
+        Button(
+            onClick = { buttonClick() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 20.dp)
+        ) {
+            Text(text = "Hello")
         }
-
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(bottom = 16.dp)
+        ) {
+            items(recipes) { recipe ->
+                RecipeItem(
+                    recipe = recipe,
+                    isSelected = recipe == selectedRecipe,
+                    onSelect = { onRecipeSelect(recipe) },
+                    onIngredientToggle = onIngredientToggle,
+                    selectedIngredients = selecedIngredients
+                )
+            }
+        }
     }
 }
-
 
 
 

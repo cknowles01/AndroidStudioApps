@@ -13,6 +13,5 @@ fun IngredientsPage(recipe: Recipe, onBack: () -> Unit, selectedIngredients: Lis
     selectedIngredients.forEach { ingredient ->
         Text(ingredient)
     }
-
     }
 
