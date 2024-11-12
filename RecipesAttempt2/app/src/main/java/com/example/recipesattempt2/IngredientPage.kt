@@ -22,9 +22,6 @@ fun IngredientsPage(
     selectedIngredients: List<String>,
     onIngredientToggle: (String) -> Unit
 ) {
-
-
-
     Column(
         modifier = Modifier
             .fillMaxSize()

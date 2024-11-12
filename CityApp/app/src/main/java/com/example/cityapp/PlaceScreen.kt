@@ -15,12 +15,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -41,9 +46,9 @@ import androidx.navigation.navArgument
 
 
 enum class PlaceScreen(@StringRes val title: String) {
-    Start(title = "Starting place"),
-    Group(title = "Group"),
-    Details(title = "more detainsl")
+    Start(title = "Types of Places"),
+    Group(title = "Places"),
+    Details(title = "Details")
 }
 
 
@@ -58,25 +63,36 @@ fun DetailsScreen(place: Place) { //third screen
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 8.dp),
+                shape = RoundedCornerShape(8.dp)
             ) {
-                Text(
-                    text = place.name,
-                    style = TextStyle(
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    ),
-                    modifier = Modifier.padding(8.dp)
-                )
-                Text(
-                    text = place.details,
-                    style = TextStyle(
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp)
+                        .wrapContentHeight(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = place.name,
+                        style = TextStyle(
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        ),
+                        modifier = Modifier.padding(8.dp)
                     )
-                )
+                    Text(
+                        text = place.details,
+                        style = TextStyle(
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    )
+                }
+
             }
         }
     }
@@ -99,6 +115,35 @@ fun PlaceItem(
         )
     }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PlaceAppBar(
+    currentScreen: PlaceScreen,
+    canNavigateBack: Boolean,
+    navigateUp: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    TopAppBar(
+        title = { Text(currentScreen.title) },
+        colors = TopAppBarDefaults.mediumTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = modifier,
+        navigationIcon = {
+            if (canNavigateBack) {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "goback"
+                    )
+                }
+            }
+        }
+    )
+}
+
+
 
 @Composable
 fun CategoryScreen( //second screen
@@ -127,7 +172,7 @@ fun CategoryScreen( //second screen
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = categoryName,
+                        text = place.name,
                         style = TextStyle(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
@@ -196,7 +241,14 @@ fun CityApp(
     val currentScreen = PlaceScreen.valueOf(
         backStackEntry?.destination?.route ?: PlaceScreen.Start.name
     )
-    Scaffold {
+    Scaffold(
+        topBar = {
+            PlaceAppBar(
+                currentScreen = currentScreen,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateUp = { navController.navigateUp() })
+        }
+    ) {
         innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
         NavHost(
