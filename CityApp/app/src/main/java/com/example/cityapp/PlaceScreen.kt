@@ -1,5 +1,6 @@
 package com.example.cityapp
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,16 +10,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+
+
+enum class PlaceScreen(@StringRes val title: String) {
+    Start(title = "Starting place"),
+    Group(title = "Group"),
+    Details(title = "more detainsl")
+}
+
 
 @Composable
 fun DetailsScreen(place: Place) {
@@ -87,34 +101,30 @@ fun CategoryScreen(
 }
 
 @Composable
-fun CityApp() {
-    val navController = rememberNavController()
+fun CityApp(
+    viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
+    navController: NavHostController = rememberNavController()
+    ) {
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = PlaceScreen.valueOf(
+        backStackEntry?.destination?.route ?: PlaceScreen.Start.name
+    )
+    Scaffold {
+        innerPadding ->
+        val uiState by viewModel.uiState.collectAsState()
+        NavHost(
+            navController = navController,
+            startDestination = PlaceScreen.Start.name,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable(route = PlaceScreen.Start.name) {
 
-    NavHost(navController = navController, startDestination = "category") {
-        composable("category") {
-            // Pass a sample list of places in each category for testing
-            CategoryScreen(
-                categoryName = "Restaurants",
-                places = listOf(
-                    Place("Restaurant", "Restaurant A", "Details about Restaurant A", "d"),
-                    Place("Restaurant", "Restaurant B", "Details about Restaurant B", "d"),
-                    Place("Restaurant", "Restaurant C", "Details about Restaurant C", "d")
-                )
-            ) { selectedPlace ->
-                // Navigate to details screen, passing place as a Parcelable
-                navController.navigate("details/${selectedPlace.name}")
             }
-        }
-        composable(
-            "details/{placeName}",
-            arguments = listOf(navArgument("placeName") { type = NavType.StringType })
-        ) { backStackEntry ->
-            val placeName = backStackEntry.arguments?.getString("placeName") ?: ""
-            //val place = findPlaceByName(placeName) // implement this function to retrieve the selected place
 
         }
     }
 }
+
 
 
 
