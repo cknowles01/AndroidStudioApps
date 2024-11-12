@@ -272,9 +272,6 @@ fun CityApp(
                         navController.navigate(PlaceScreen.Details.name)
                     }
                 )
-
-
-                
             }
             composable(route = PlaceScreen.Details.name) {
                 uiState.selectedPlace?.let { it1 -> DetailsScreen(place = it1) }
