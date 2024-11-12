@@ -15,21 +15,21 @@ data class Category(
 object DataSource {
     val places = listOf(
         Category(
-            "Restaurant",
+            "Restaurants",
             listOf(
                 Place("1", "Restaurants", "Tamarack", "details..."),
                 Place("1", "Restaurants", "Place", "deets..."),
             )
         ),
         Category(
-            "Park",
+            "Parks",
             listOf(
                 Place("2", "Parks", "Caras Park", "deets.."),
                 Place("2", "Parks", "Missoula Park", "deets."),
             )
         ),
         Category(
-            "Store",
+            "Stores",
             listOf(
                 Place("3", "Stores", "Scheels", "deets"),
                 Place("3", "Stores", "Scheels", "deets") ,
