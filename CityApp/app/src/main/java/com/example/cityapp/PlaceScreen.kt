@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -129,25 +130,25 @@ fun PlacesItems( //first screen
                 //elevation = 4.dp,
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(24.dp)
-                        .background(MaterialTheme.colorScheme.surface)
+                        //.background(MaterialTheme.colorScheme.surface)
+                        .wrapContentHeight(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = category,
-
                         style = TextStyle(
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
                         ),
                         modifier = Modifier
-                            .fillMaxWidth()
                             .clickable { onClick(category) }
-                            .background(MaterialTheme.colorScheme.surface)
+                            //.background(MaterialTheme.colorScheme.surface)
                     )
                 }
             }
