@@ -49,20 +49,36 @@ enum class PlaceScreen(@StringRes val title: String) {
 
 @Composable
 fun DetailsScreen(place: Place) { //third screen
-    Column(
-        modifier= Modifier
+    LazyColumn(
+        modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp)
     ) {
-        Text(
-            text = place.name,
-            modifier = Modifier.padding(8.dp)
-        )
-        Text(
-            text = place.details
-        )
+        item {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            ) {
+                Text(
+                    text = place.name,
+                    style = TextStyle(
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    ),
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = place.details,
+                    style = TextStyle(
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                )
+            }
+        }
     }
 }
 
