@@ -147,14 +147,18 @@ fun CityApp(
             composable(route = PlaceScreen.Group.name) {
                 CategoryScreen(
                     categoryName = uiState.selectedCategory ?: "",
-                    places = uiState.placesList
-                ) {
+                    places = uiState.placesList,
+                    onPlaceSelected = { place ->
+                        viewModel.setSelectedPlace(place)
+                        navController.navigate(PlaceScreen.Details.name)
+                    }
+                )
 
-                }
+
                 
             }
             composable(route = PlaceScreen.Details.name) {
-                DetailsScreen(place = uiState.)
+                uiState.selectedPlace?.let { it1 -> DetailsScreen(place = it1) }
             }
 
         }

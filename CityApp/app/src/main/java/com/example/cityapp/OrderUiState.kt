@@ -10,4 +10,4 @@ data class OrderUiState(
     val selectedCategory: String? = null,
     val placesList: List<Place> = emptyList(),
     val selectedPlace: Place? = null
-) : MutableStateFlow<OrderUiState>
+)
