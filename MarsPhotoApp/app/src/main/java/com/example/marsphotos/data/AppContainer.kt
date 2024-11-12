@@ -10,7 +10,7 @@ import retrofit2.http.GET
 
 import com.example.marsphotos.network.MarsApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import okhttp3.MediaType.Companion.toMediaType
+
 
 interface AppContainer {
     val marsPhotosRepository: MarsPhotosRepository
