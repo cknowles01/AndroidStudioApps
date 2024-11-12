@@ -51,9 +51,6 @@ fun DetailsScreen(place: Place) {
             text = place.details
         )
     }
-
-
-
 }
 
 @Composable
@@ -75,7 +72,7 @@ fun PlaceItem(
 }
 
 @Composable
-fun CategoryScreen(
+fun CategoryScreen( //second screen
     categoryName: String,
     places: List<Place>,
     onPlaceSelected: (Place) -> Unit
@@ -101,6 +98,29 @@ fun CategoryScreen(
 }
 
 @Composable
+fun PlacesItems( //first screen
+    onClick: (String) -> Unit,
+) {
+    val categories = DataSource.places.map { it.categoryName}
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        items(categories) { category ->
+            Text(
+                text = category,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .clickable { onClick(category) }
+            )
+        }
+    }
+}
+
+@Composable
 fun CityApp(
     viewModel: OrderViewModel = androidx.lifecycle.viewmodel.compose.viewModel(),
     navController: NavHostController = rememberNavController()
@@ -118,7 +138,23 @@ fun CityApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = PlaceScreen.Start.name) {
+                PlacesItems(
+                    onClick = { categoryName ->
+                        viewModel.setTypeOfPlace(categoryName)
+                        navController.navigate(PlaceScreen.Group.name) }
+                )
+            }
+            composable(route = PlaceScreen.Group.name) {
+                CategoryScreen(
+                    categoryName = uiState.selectedCategory ?: "",
+                    places = uiState.placesList
+                ) {
 
+                }
+                
+            }
+            composable(route = PlaceScreen.Details.name) {
+                DetailsScreen(place = uiState.)
             }
 
         }

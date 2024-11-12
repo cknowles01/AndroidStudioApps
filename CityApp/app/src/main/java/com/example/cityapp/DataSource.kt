@@ -8,7 +8,7 @@ data class Place(
 )
 
 data class Category(
-    val name: String,
+    val categoryName: String,
     val places: List<Place>
 )
 
@@ -36,11 +36,6 @@ object DataSource {
             )
         )
     )
-
-
-
-
-
 }
 
 
