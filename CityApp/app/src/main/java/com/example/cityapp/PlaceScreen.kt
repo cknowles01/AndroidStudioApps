@@ -90,21 +90,36 @@ fun CategoryScreen( //second screen
     places: List<Place>,
     onPlaceSelected: (Place) -> Unit
 ) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text(
-            text = categoryName,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-        LazyColumn {
-            items(places) { place ->
-                PlaceItem(
-                    place = place,
-                    onSelect = { onPlaceSelected(place) }
-                )
+        items(places) { place ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+                    .clickable { onPlaceSelected(place) }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp)
+                        .wrapContentHeight(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = categoryName,
+                        style = TextStyle(
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    )
+
+                }
             }
         }
     }
