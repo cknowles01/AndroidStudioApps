@@ -7,6 +7,11 @@ data class Place(
     val details: String
 )
 
+data class Category(
+    val name: String,
+    val places: List<Place>
+)
+
 object DataSource {
     val places = listOf(
         Place(1, "Restaurants", "Tamarack", "details..."),
