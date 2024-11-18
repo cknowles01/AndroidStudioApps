@@ -29,4 +29,3 @@ class OfflineItemsRepository(private val itemDao: ItemDao) : ItemsRepository {
 
     override suspend fun updateItem(item: Item) = itemDao.update(item)
 }
-

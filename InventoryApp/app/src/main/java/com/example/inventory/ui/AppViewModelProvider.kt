@@ -55,8 +55,6 @@ object AppViewModelProvider {
         initializer {
             HomeViewModel()
         }
-
-
     }
 }
 
